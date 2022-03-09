@@ -1,0 +1,157 @@
+[2022-02-25 04:35:13,688] {taskinstance.py:1037} INFO - Dependencies all met for <TaskInstance: Spotify_Song_dag.sheet_run scheduled__2022-02-25T04:15:53.089092+00:00 [queued]>
+[2022-02-25 04:35:13,717] {taskinstance.py:1037} INFO - Dependencies all met for <TaskInstance: Spotify_Song_dag.sheet_run scheduled__2022-02-25T04:15:53.089092+00:00 [queued]>
+[2022-02-25 04:35:13,717] {taskinstance.py:1243} INFO - 
+--------------------------------------------------------------------------------
+[2022-02-25 04:35:13,717] {taskinstance.py:1244} INFO - Starting attempt 1 of 2
+[2022-02-25 04:35:13,717] {taskinstance.py:1245} INFO - 
+--------------------------------------------------------------------------------
+[2022-02-25 04:35:13,824] {taskinstance.py:1264} INFO - Executing <Task(PythonOperator): sheet_run> on 2022-02-25 04:15:53.089092+00:00
+[2022-02-25 04:35:13,832] {standard_task_runner.py:52} INFO - Started process 12961 to run task
+[2022-02-25 04:35:13,839] {standard_task_runner.py:76} INFO - Running: ['airflow', 'tasks', 'run', 'Spotify_Song_dag', 'sheet_run', 'scheduled__2022-02-25T04:15:53.089092+00:00', '--job-id', '200', '--raw', '--subdir', 'DAGS_FOLDER/spotify_check_dag.py', '--cfg-path', '/var/folders/nx/v6d0bskn22s742wqx2vwc_rm0000gn/T/tmpq_c9sv07', '--error-file', '/var/folders/nx/v6d0bskn22s742wqx2vwc_rm0000gn/T/tmpbs80pdlm']
+[2022-02-25 04:35:13,843] {standard_task_runner.py:77} INFO - Job 200: Subtask sheet_run
+[2022-02-25 04:35:13,934] {logging_mixin.py:109} INFO - Running <TaskInstance: Spotify_Song_dag.sheet_run scheduled__2022-02-25T04:15:53.089092+00:00 [running]> on host 1.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.0.ip6.arpa
+[2022-02-25 04:35:14,205] {logging_mixin.py:109} WARNING - /Users/user/oneplace/opVM/lib/python3.9/site-packages/sqlalchemy/sql/coercions.py:510 SAWarning: Coercing Subquery object into a select() for use in IN(); please pass a select() construct explicitly
+[2022-02-25 04:35:14,332] {taskinstance.py:1429} INFO - Exporting the following env vars:
+AIRFLOW_CTX_DAG_EMAIL=airflow@example.com
+AIRFLOW_CTX_DAG_OWNER=airflow
+AIRFLOW_CTX_DAG_ID=Spotify_Song_dag
+AIRFLOW_CTX_TASK_ID=sheet_run
+AIRFLOW_CTX_EXECUTION_DATE=2022-02-25T04:15:53.089092+00:00
+AIRFLOW_CTX_DAG_RUN_ID=scheduled__2022-02-25T04:15:53.089092+00:00
+[2022-02-25 04:35:14,989] {__init__.py:49} INFO - file_cache is only supported with oauth2client<4.0.0
+[2022-02-25 04:35:17,026] {taskinstance.py:1718} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/httplib2/__init__.py", line 1343, in _conn_request
+    conn.connect()
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/httplib2/__init__.py", line 1119, in connect
+    address_info = socket.getaddrinfo(host, port, 0, socket.SOCK_STREAM)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/socket.py", line 953, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/google_auth_httplib2.py", line 119, in __call__
+    response, data = self.http.request(
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/httplib2/__init__.py", line 1701, in request
+    (response, content) = self._request(
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/httplib2/__init__.py", line 1421, in _request
+    (response, content) = self._conn_request(conn, request_uri, method, body, headers)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/httplib2/__init__.py", line 1350, in _conn_request
+    raise ServerNotFoundError("Unable to find the server at %s" % conn.host)
+httplib2.error.ServerNotFoundError: Unable to find the server at oauth2.googleapis.com
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 1334, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 1460, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 1516, in _execute_task
+    result = execute_callable(context=context)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/operators/python.py", line 188, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/Users/user/oneplace/dags/spotify_check_dag.py", line 145, in update_data_to_sheet
+    update_data = sheet.values().update(spreadsheetId=sheetid, range=ranges,valueInputOption='USER_ENTERED', body = {"values": data}).execute()
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/googleapiclient/_helpers.py", line 131, in positional_wrapper
+    return wrapped(*args, **kwargs)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/googleapiclient/http.py", line 922, in execute
+    resp, content = _retry_request(
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/googleapiclient/http.py", line 190, in _retry_request
+    resp, content = http.request(uri, method, *args, **kwargs)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/google_auth_httplib2.py", line 209, in request
+    self.credentials.before_request(self._request, method, uri, request_headers)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/google/auth/credentials.py", line 133, in before_request
+    self.refresh(request)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/google/oauth2/service_account.py", line 410, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/google/oauth2/_client.py", line 193, in jwt_grant
+    response_data = _token_endpoint_request(request, token_uri, body)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/google/oauth2/_client.py", line 161, in _token_endpoint_request
+    response_status_ok, response_data = _token_endpoint_request_no_throw(
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/google/oauth2/_client.py", line 115, in _token_endpoint_request_no_throw
+    response = request(method="POST", url=token_uri, headers=headers, body=body)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/google_auth_httplib2.py", line 126, in __call__
+    raise exceptions.TransportError(exc)
+google.auth.exceptions.TransportError: Unable to find the server at oauth2.googleapis.com
+[2022-02-25 04:35:17,065] {taskinstance.py:1272} INFO - Marking task as UP_FOR_RETRY. dag_id=Spotify_Song_dag, task_id=sheet_run, execution_date=20220225T041553, start_date=20220225T043513, end_date=20220225T043517
+[2022-02-25 04:35:17,080] {standard_task_runner.py:89} ERROR - Failed to execute job 200 for task sheet_run
+Traceback (most recent call last):
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/httplib2/__init__.py", line 1343, in _conn_request
+    conn.connect()
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/httplib2/__init__.py", line 1119, in connect
+    address_info = socket.getaddrinfo(host, port, 0, socket.SOCK_STREAM)
+  File "/Library/Frameworks/Python.framework/Versions/3.9/lib/python3.9/socket.py", line 953, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/google_auth_httplib2.py", line 119, in __call__
+    response, data = self.http.request(
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/httplib2/__init__.py", line 1701, in request
+    (response, content) = self._request(
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/httplib2/__init__.py", line 1421, in _request
+    (response, content) = self._conn_request(conn, request_uri, method, body, headers)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/httplib2/__init__.py", line 1350, in _conn_request
+    raise ServerNotFoundError("Unable to find the server at %s" % conn.host)
+httplib2.error.ServerNotFoundError: Unable to find the server at oauth2.googleapis.com
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/task/task_runner/standard_task_runner.py", line 85, in _start_by_fork
+    args.func(args, dag=self.dag)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/cli/cli_parser.py", line 48, in command
+    return func(*args, **kwargs)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/utils/cli.py", line 92, in wrapper
+    return f(*args, **kwargs)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/cli/commands/task_command.py", line 298, in task_run
+    _run_task_by_selected_method(args, dag, ti)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/cli/commands/task_command.py", line 107, in _run_task_by_selected_method
+    _run_raw_task(args, ti)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/cli/commands/task_command.py", line 180, in _run_raw_task
+    ti._run_raw_task(
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/utils/session.py", line 70, in wrapper
+    return func(*args, session=session, **kwargs)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 1334, in _run_raw_task
+    self._execute_task_with_callbacks(context)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 1460, in _execute_task_with_callbacks
+    result = self._execute_task(context, self.task)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/models/taskinstance.py", line 1516, in _execute_task
+    result = execute_callable(context=context)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/operators/python.py", line 174, in execute
+    return_value = self.execute_callable()
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/operators/python.py", line 188, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/Users/user/oneplace/dags/spotify_check_dag.py", line 145, in update_data_to_sheet
+    update_data = sheet.values().update(spreadsheetId=sheetid, range=ranges,valueInputOption='USER_ENTERED', body = {"values": data}).execute()
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/googleapiclient/_helpers.py", line 131, in positional_wrapper
+    return wrapped(*args, **kwargs)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/googleapiclient/http.py", line 922, in execute
+    resp, content = _retry_request(
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/googleapiclient/http.py", line 190, in _retry_request
+    resp, content = http.request(uri, method, *args, **kwargs)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/google_auth_httplib2.py", line 209, in request
+    self.credentials.before_request(self._request, method, uri, request_headers)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/google/auth/credentials.py", line 133, in before_request
+    self.refresh(request)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/google/oauth2/service_account.py", line 410, in refresh
+    access_token, expiry, _ = _client.jwt_grant(
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/google/oauth2/_client.py", line 193, in jwt_grant
+    response_data = _token_endpoint_request(request, token_uri, body)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/google/oauth2/_client.py", line 161, in _token_endpoint_request
+    response_status_ok, response_data = _token_endpoint_request_no_throw(
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/google/oauth2/_client.py", line 115, in _token_endpoint_request_no_throw
+    response = request(method="POST", url=token_uri, headers=headers, body=body)
+  File "/Users/user/oneplace/opVM/lib/python3.9/site-packages/google_auth_httplib2.py", line 126, in __call__
+    raise exceptions.TransportError(exc)
+google.auth.exceptions.TransportError: Unable to find the server at oauth2.googleapis.com
+[2022-02-25 04:35:17,127] {local_task_job.py:154} INFO - Task exited with return code 1
+[2022-02-25 04:35:17,156] {local_task_job.py:264} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2022-02-25 04:35:17,162] {logging_mixin.py:109} WARNING - /Users/user/oneplace/opVM/lib/python3.9/site-packages/airflow/models/dag.py:1079 SADeprecationWarning: Query.value() is deprecated and will be removed in a future release.  Please use Query.with_entities() in combination with Query.scalar() (deprecated since: 1.4)

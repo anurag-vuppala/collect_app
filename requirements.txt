@@ -1,0 +1,7 @@
+docker
+apache-airflow
+pandas
+sqlalchemy
+google-api-client
+json
+requests
